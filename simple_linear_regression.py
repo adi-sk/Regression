@@ -8,7 +8,7 @@ import pandas as pd
 # Importing the dataset
 dataset = pd.read_csv('Salary_Data.csv')
 X = dataset.iloc[:, :-1].values  # here X represents Experience which is an independent varialble
-y = dataset.iloc[:, 1].values    # Y represents Salary which is an independent variables 
+y = dataset.iloc[:, 1].values    # Y represents Salary which is an dependent variables 
 
 # Splitting the dataset into the Training set and Test set
 from sklearn.cross_validation import train_test_split
