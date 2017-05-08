@@ -35,7 +35,7 @@ regressor.fit(X_train,y_train) #this is a step where machine actually learnt rel
 
 #-------------------------------------------#-------------------------------------------------------#
 
-                            #Predicting the test set results 
+                            #Predicting the test set result 
                             
 y_pred = regressor.predict(X_test)        
 
