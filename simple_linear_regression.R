@@ -23,3 +23,24 @@ regressor = lm(formula = Salary ~ YearsExperience,
 # predicting the test set results
 
 y_pred = predict(regressor,newdata = test_set)
+
+# visualising Training set results 
+  # here we are going to use ggplot2 package to plot the charts
+ggplot() +
+  geom_point(aes(x = training_set$YearsExperience,y = training_set$Salary),
+             colour = 'red') + #here we plotted all training set points
+  geom_line(aes(x = training_set$YearsExperience,y = predict(regressor,newdata = training_set)),colour = 'blue')+ # this will print regression line which showa the predicted values of taining set of Salaries
+  ggtitle('Salary Vs Experience(Training set)') +
+  xlab('Years of experience')+
+  ylab('Salaries')
+  # our model was built on this training set which gave satisfying results though now lets see how it works on test set 
+
+# visualising Test set results
+# here we are going to use ggplot2 package to plot the charts
+ggplot() +
+  geom_point(aes(x = test_set$YearsExperience,y = test_set$Salary),
+             colour = 'red') + #here we plotted all training set points
+  geom_line(aes(x = training_set$YearsExperience,y = predict(regressor,newdata = training_set)),colour = 'blue')+ # this will print regression line which showa the predicted values of taining set of Salaries
+  ggtitle('Salary Vs Experience(Test set)') +
+  xlab('Years of experience')+
+  ylab('Salaries')
