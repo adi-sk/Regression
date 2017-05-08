@@ -19,5 +19,7 @@ test_set = subset(dataset, split == FALSE)
 
 regressor = lm(formula = Salary ~ YearsExperience,
                data = training_set) #after running this command we can see the summary of the regressor by using 'summary(regressor)' which includes some statistical information
+ 
+# predicting the test set results
 
-
+y_pred = predict(regressor,newdata = test_set)
