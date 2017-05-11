@@ -50,3 +50,16 @@ regressor.fit(X_train,y_train)
 # predicting Test set result
 y_pred = regressor.predict(X_test)
 
+# Building the optimal model using Backward Ellimination
+  # the goal in this method is to select highly statisticaly significant that has great impact on dependent variable and to remove those which are not impacting dependent varible   
+  
+    #library which we use here for Backward Elimination
+import statsmodels.formula.api as sm # this library is used to test the statistical significance of variable
+
+# NOTE : as we are using this library one thing should be taken care of that this library will not add constant value to our eqn that is if eqn is y(independent VAR)= C + c1x1+c2x2+.....+cnxn  here this library will not take care of value 'C' 
+# so what we can do here to Add C is we will add x0=1 for will make eqn  y = c0x0+c1x1+c2x2+.....+cnxn  now here (C = 1)
+
+X = np.append(arr = np.ones((50,1)).astype(int), values = X,axis = 1) # adding extra column to independent data set with all 1s
+
+
+  
