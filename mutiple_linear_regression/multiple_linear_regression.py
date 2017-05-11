@@ -51,7 +51,7 @@ regressor.fit(X_train,y_train)
 y_pred = regressor.predict(X_test)
 
 # Building the optimal model using Backward Ellimination
-  # the goal in this method is to select highly statisticaly significant that has great impact on dependent variable and to remove those which are not impacting dependent varible   
+  # the goal in this method is to select highly statistically significant that has great impact on dependent variable and to remove those which are not impacting dependent varible   
   
     #library which we use here for Backward Elimination
 import statsmodels.formula.api as sm # this library is used to test the statistical significance of variable
@@ -61,5 +61,30 @@ import statsmodels.formula.api as sm # this library is used to test the statisti
 
 X = np.append(arr = np.ones((50,1)).astype(int), values = X,axis = 1) # adding extra column to independent data set with all 1s
 
+# now we will create optimal matrix of feature which will include highly statistically significant independent Variables which has high impact on profits          
+                # step 1 : add all the Variables to optimal matrix
+X_opt = X[:,[0,1,2,3,4,5]]
 
-  
+                 #step 2 : fit full model with all possible predictors 
+regressor_OLS = sm.OLS(endog = y , exog = X_opt).fit()#if we open documentation of OLS class it is clearly mention that intercept is not included has to be included by use that is what we did on line 62
+regressor_OLS.summary() #this will help us to find the p-value of every variable , lesser is the p-value more is the indepent value impacts the dependent variable  
+
+                     
+                 # step 3 : remove the variable with highest p-value and fit the model again without that variable (here to select high and low P-value we have considered significant value = 0.05 if p-value > 0.5 it will get removed from the optimal matrix)    
+X_opt = X[:,[0,1,3,4,5]]  # second variable deleted it is having p-value greter than 0.05                     
+regressor_OLS = sm.OLS(endog = y , exog = X_opt).fit()# again fit 
+regressor_OLS.summary()   
+
+# repeat these steps till we get highest p-value < 0.05
+                  
+X_opt = X[:,[0,3,4,5]]
+regressor_OLS = sm.OLS(endog = y , exog = X_opt).fit()# again fit 
+regressor_OLS.summary()
+
+X_opt = X[:,[0,3,5]]
+regressor_OLS = sm.OLS(endog = y , exog = X_opt).fit()# again fit 
+regressor_OLS.summary()
+
+X_opt = X[:,[0,3]]
+regressor_OLS = sm.OLS(endog = y , exog = X_opt).fit()# again fit 
+regressor_OLS.summary()                        
