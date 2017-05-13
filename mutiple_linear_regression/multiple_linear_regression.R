@@ -27,11 +27,34 @@ test_set = subset(dataset, split == FALSE)
                           # OR we can use
 regressor = lm(formula = Profit ~ ., # '.' includes all the independent variables
                data = training_set)  # the best part of the R regressor is it doesn't fall in dummy variable trap it automatically removes one dummy variable while forming model
+            # even there is no need to create dummy varibles regressor will automatically create dummy variables for factors that we have created on line 7                            
 summary(regressor) # if we see the summary we can find that only siginificant variable here is 'R.D.Spend' it is the only variable which has p value < 0.05
 
 # that means we can replace our regression formula with Profit ~ R.D.Spend
 
 
 # predicting Test set Results
-
 y_pred = predict(regressor,newdata = test_set) # even if we use formula Profit ~ R.D.Spend we will get the same results in y_pred bcz R.D.Spend is the only Significant variable here
+
+
+# Building The optimal model using Backward Elimination 
+  #now we will remove variables which are not statistically Significant One by One according to there p values
+  # refer python file for complete detail steps help in Backward Elimination
+regressor = lm(formula = Profit ~ R.D.Spend + Administration + Marketing.Spend + State,
+               data = dataset)
+summary(regressor)
+
+
+regressor = lm(formula = Profit ~ R.D.Spend + Administration + Marketing.Spend,
+               data = dataset)
+summary(regressor)
+
+
+regressor = lm(formula = Profit ~ R.D.Spend + Marketing.Spend,
+               data = dataset)
+summary(regressor)
+
+
+regressor = lm(formula = Profit ~ R.D.Spend,
+               data = dataset)
+summary(regressor)
