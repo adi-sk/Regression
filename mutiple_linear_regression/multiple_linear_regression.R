@@ -30,3 +30,8 @@ regressor = lm(formula = Profit ~ ., # '.' includes all the independent variable
 summary(regressor) # if we see the summary we can find that only siginificant variable here is 'R.D.Spend' it is the only variable which has p value < 0.05
 
 # that means we can replace our regression formula with Profit ~ R.D.Spend
+
+
+# predicting Test set Results
+
+y_pred = predict(regressor,newdata = test_set) # even if we use formula Profit ~ R.D.Spend we will get the same results in y_pred bcz R.D.Spend is the only Significant variable here
