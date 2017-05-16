@@ -21,3 +21,16 @@ X_train = sc_X.fit_transform(X_train)
 X_test = sc_X.transform(X_test)
 sc_y = StandardScaler()
 y_train = sc_y.fit_transform(y_train)"""
+
+#Fitting Linear Regression to dataset      # this regressor is created to compare the result between linear regression model and Polynomial Regression
+from sklearn.linear_model import LinearRegression
+lin_reg = LinearRegression()
+lin_reg.fit(X,y)
+ 
+# Fitting Polynomial Regression to the dataset
+from sklearn.preprocessing import PolynomialFeatures
+poly_reg = PolynomialFeatures(degree = 2)    #this poly_reg object is a transformer tool that is going to transfer matrix of X into new matrix X  which will contain columns of X,X^2,X^3..... here as we used degree = 2 it will create X and X^2 this object will also contain one more column which will have only 1s which will take care of that constant variable in expression
+X_poly = poly_reg.fit_transform(X)      
+    #now we will fit this X_poly matrix into the linear regression model 
+lin_reg_2 = LinearRegression()
+lin_reg_2.fit(X_poly,y)        
