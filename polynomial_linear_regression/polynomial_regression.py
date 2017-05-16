@@ -29,8 +29,28 @@ lin_reg.fit(X,y)
  
 # Fitting Polynomial Regression to the dataset
 from sklearn.preprocessing import PolynomialFeatures
-poly_reg = PolynomialFeatures(degree = 2)    #this poly_reg object is a transformer tool that is going to transfer matrix of X into new matrix X  which will contain columns of X,X^2,X^3..... here as we used degree = 2 it will create X and X^2 this object will also contain one more column which will have only 1s which will take care of that constant variable in expression
+poly_reg = PolynomialFeatures(degree = 4)    #this poly_reg object is a transformer tool that is going to transfer matrix of X into new matrix X  which will contain columns of X,X^2,X^3..... here as we used degree = 2 it will create X and X^2 this object will also contain one more column which will have only 1s which will take care of that constant variable in expression
 X_poly = poly_reg.fit_transform(X)      
     #now we will fit this X_poly matrix into the linear regression model 
 lin_reg_2 = LinearRegression()
-lin_reg_2.fit(X_poly,y)        
+lin_reg_2.fit(X_poly,y)       
+
+
+# Visualising the linear Regression results 
+plt.scatter(X,y,color = 'red')
+plt.plot(X, lin_reg.predict(X),color = 'blue')
+plt.title('salary detector (Linear regression)')
+plt.xlabel('Position level')
+plt.ylabel('Salary')
+plt.show()                   # this graph is not at all showing best fit for the data the predicted results were too far
+
+
+# Visualising the Polynomial Regression results
+X_grid = np.arange(min(X), max(X), 0.1) # this will contain all the levels (10 levels according to dataset) plus incremental steps between the levels with a resolution of 0.1  
+X_grid = X_grid.reshape((len(X_grid),1)) # to convert vector to matrix
+plt.scatter(X,y,color = 'red')
+plt.plot(X_grid, lin_reg_2.predict(poly_reg.fit_transform(X_grid)),color = 'blue')
+plt.title('salary detector (Polinomial regression)')
+plt.xlabel('Position level')
+plt.ylabel('Salary')
+plt.show() 
