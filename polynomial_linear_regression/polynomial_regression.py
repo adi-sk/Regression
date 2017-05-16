@@ -53,4 +53,12 @@ plt.plot(X_grid, lin_reg_2.predict(poly_reg.fit_transform(X_grid)),color = 'blue
 plt.title('salary detector (Polinomial regression)')
 plt.xlabel('Position level')
 plt.ylabel('Salary')
-plt.show() 
+plt.show()                              # polinomial regression model fits much better to our dataset problem than linear regression model
+
+        
+# Predicting new result with linear regression 
+lin_reg.predict(6.5)        
+        
+# Predicting new result with polinomial regression
+lin_reg_2.predict(poly_reg.fit_transform(6.5))        
+        
