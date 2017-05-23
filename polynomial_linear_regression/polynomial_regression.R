@@ -25,5 +25,43 @@ lin_reg = lm(formula = Salary ~ Level,
   # in short what we can conclude from this is polynomial regression module is nothing but Multiple Linear regression model that is composed of one independent variable and additional independent variables that are the polynomial terms of the first independent variable
 dataset$Level2 = dataset$Level^2  # this is a polynomial feature or we can say we are adding one extra column here which is the power 2 of Level
 dataset$Level3 = dataset$Level^3
+dataset$Level4 = dataset$Level^4
 poly_reg = lm(formula = Salary ~ . ,
               data = dataset)
+
+#Visualizing the linear regression Results
+ggplot()+
+  geom_point(aes(x= dataset$Level , y = dataset$Salary),
+             color = 'red')+
+  geom_line(aes(x= dataset$Level , y = predict(lin_reg,newdata = dataset)),
+            color = 'blue')+
+  ggtitle('truth or bluff (Linear Regression)')+
+  xlab('Level')+
+  ylab('Salary')
+  
+#Visualizing the polynomial Regression results
+ggplot()+
+  geom_point(aes(x= dataset$Level , y = dataset$Salary),
+             color = 'red')+
+  geom_line(aes(x= dataset$Level , y = predict(poly_reg,newdata = dataset)),
+            color = 'blue')+
+  ggtitle('truth or bluff (Polynomial Regression)')+
+  xlab('Level')+
+  ylab('Salary')
+
+# Visualising the Regression Model results (for higher resolution and smoother curve)
+# install.packages('ggplot2')
+x_grid = seq(min(dataset$Level), max(dataset$Level), 0.1)  
+ggplot() +
+  geom_point(aes(x = dataset$Level, y = dataset$Salary),
+             colour = 'red') +
+  geom_line(aes(x = x_grid, y = predict(poly_reg,
+                                        newdata = data.frame(Level = x_grid,
+                                                             Level2 = x_grid^2,
+                                                             Level3 = x_grid^3,
+                                                             Level4 = x_grid^4))),
+            colour = 'blue') +
+  ggtitle('Truth or Bluff (Polynomial Regression)') +
+  xlab('Level') +
+  ylab('Salary')
+
