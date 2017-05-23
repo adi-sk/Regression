@@ -49,6 +49,21 @@ ggplot()+
   xlab('Level')+
   ylab('Salary')
 
+
+# predicting new result with Linear Regression
+y_pred = predict(lin_reg,data.frame(Level = 6.5)) #here we have to create new dataset for single data that we want to predict by using data.dataframe we can add extra cell in our data to add specific value in it
+# here data.frame(Level = 6.5)  actually created dataset with Level variable and 6.5 entry in Level column
+
+
+# predicting new result with Polynomial Regression
+
+y_pred = predict(poly_reg,data.frame(Level = 6.5,
+                                    Level2 = 6.5^2,
+                                    Level3 = 6.5^3,
+                                    Level4 = 6.5^4))
+
+
+
 # Visualising the Regression Model results (for higher resolution and smoother curve)
 # install.packages('ggplot2')
 x_grid = seq(min(dataset$Level), max(dataset$Level), 0.1)  
@@ -64,4 +79,5 @@ ggplot() +
   ggtitle('Truth or Bluff (Polynomial Regression)') +
   xlab('Level') +
   ylab('Salary')
+
 
