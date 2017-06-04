@@ -66,7 +66,7 @@ X = np.append(arr = np.ones((50,1)).astype(int), values = X,axis = 1) # adding e
 X_opt = X[:,[0,1,2,3,4,5]]
 
                  #step 2 : fit full model with all possible predictors 
-regressor_OLS = sm.OLS(endog = y , exog = X_opt).fit()#if we open documentation of OLS class it is clearly mention that intercept is not included has to be included by use that is what we did on line 62
+regressor_OLS = sm.OLS(endog = y , exog = X_opt).fit()#if we open documentation of OLS class it is clearly mention that intercept is not included has to be included by user that is what we did on line 62
 regressor_OLS.summary() #this will help us to find the p-value of every variable , lesser is the p-value more is the indepent value impacts the dependent variable  
 
                      
