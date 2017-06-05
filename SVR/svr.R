@@ -16,13 +16,14 @@ dataset = dataset[2:3]
 # training_set = scale(training_set)
 # test_set = scale(test_set)
 
-# Fitting SVR to the dataset
-# install.packages('e1071')
+# Fitting the SVR to the dataset
+# Create your SVR regressor here
+#install.packages('e1071')
 library(e1071)
 regressor = svm(formula = Salary ~ .,
                 data = dataset,
-                type = 'eps-regression',
-                kernel = 'radial')
+                type = 'eps-regression')
+
 
 # Predicting a new result
 y_pred = predict(regressor, data.frame(Level = 6.5))
@@ -39,7 +40,7 @@ ggplot() +
   xlab('Level') +
   ylab('Salary')
 
-# Visualising the SVR results (for higher resolution and smoother curve)
+# Visualising the Regression Model results (for higher resolution and smoother curve)
 # install.packages('ggplot2')
 library(ggplot2)
 x_grid = seq(min(dataset$Level), max(dataset$Level), 0.1)
