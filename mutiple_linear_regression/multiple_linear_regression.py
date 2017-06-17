@@ -25,7 +25,7 @@ X = onehotencoder.fit_transform(X).toarray(); # simply fitting data into object
 # Avoiding the dummy variable trap
 # Mostly python provides some libraries which take care of dummy varible trap
 
-X = X[:,1:] # We are just avoiding dummy variable trap here basically what we are doing is we are avoid one of the dummy variable to be in equation                               
+X = X[:,1:] # We are just avoiding dummy variable trap here basically what we are doing is we are avoiding one of the dummy variable to be in equation                               
                 
 # Splitting the dataset into the Training set and Test set
 from sklearn.cross_validation import train_test_split
